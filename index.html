@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Maze search practice</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Maze search practice</h1>
+      <p>
+        Write <code>shortestPath</code> in <code>path.js</code>. Save the file.
+        This page runs that function, draws the queue, and tells you whether the
+        route is shortest.
+      </p>
+    </header>
+    <main>
+      <section class="board" aria-label="Maze">
+        <p id="status" class="status" aria-live="polite">Loading path.js</p>
+        <div class="maze-wrap">
+          <div id="maze" class="maze"></div>
+        </div>
+        <div class="controls">
+          <button id="back" type="button">Back</button>
+          <button id="next" type="button" class="primary">Next</button>
+          <button id="play" type="button">Play</button>
+          <span id="counter" class="counter"></span>
+        </div>
+        <p id="caption" class="caption"></p>
+        <ul class="legend">
+          <li><i class="swatch wall"></i> Wall</li>
+          <li><i class="swatch open"></i> Open</li>
+          <li><i class="swatch visited"></i> Visited</li>
+          <li><i class="swatch queued"></i> In queue</li>
+          <li><i class="swatch current"></i> Just dequeued</li>
+          <li><i class="swatch path"></i> Returned path</li>
+        </ul>
+      </section>
+      <section class="side">
+        <h2>Your function on four mazes</h2>
+        <ol id="results" class="results"></ol>
+        <h2>How to write it in an interview</h2>
+        <ol class="script">
+          <li>
+            <strong>Say why this is BFS.</strong>
+            Every legal step costs 1. A queue expands the floor in rings. The
+            first time the finish comes off the front, that distance is the
+            smallest one.
+          </li>
+          <li>
+            <strong>Name three structures before you code.</strong>
+            The queue holds cells you have reached and not yet expanded. The
+            visited set stops a cell from being queued twice. The parent map
+            remembers the step that found each cell, which is how you rebuild
+            the route.
+          </li>
+          <li>
+            <strong>Mark visited when you enqueue, not when you dequeue.</strong>
+            The first time a cell is reached is the shortest way there. A later
+            arrival is a longer walk to the same square.
+          </li>
+          <li>
+            <strong>Rebuild from the finish.</strong>
+            Follow parent back to the start, then reverse that list. The queue
+            itself only tells you the distance.
+          </li>
+          <li>
+            <strong>State the cost.</strong>
+            Each open cell is queued once, so time and extra memory are both
+            rows times columns.
+          </li>
+        </ol>
+        <h2>Code that just ran</h2>
+        <pre id="source" class="source"></pre>
+      </section>
+    </main>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
